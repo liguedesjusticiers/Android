@@ -4,9 +4,13 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 
 public class Login extends Activity {
+
+    Button myButton;
+    EditText
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
