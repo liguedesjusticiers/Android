@@ -1,10 +1,7 @@
 <resources>
     <string name="app_name">Stars\'UP</string>
-
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="login">Nom d'utilisateur</string>
-    <string name="password">Mot de passe</string>
-    <string name="connexion">Connection</string>
-    <string name="confirm">Valider</string>
+    <string name="texte_connexion">Veuillez entrer vos identifiants de connexion</string>
+    <string name="texte_identifiant">Identifiant</string>
+    <string name="texte_mdp">Mot de passe</string>
+    <string name="texte_bouton_valider">Valider</string>
 </resources>

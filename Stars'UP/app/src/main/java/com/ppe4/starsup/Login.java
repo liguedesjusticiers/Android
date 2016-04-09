@@ -1,42 +1,43 @@
 package com.ppe4.starsup;
 
-import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+public class Login extends AppCompatActivity {
 
-public class Login extends Activity {
-
-    Button myButton;
-    EditText
+    EditText identifiant = null;
+    EditText mdp = null;
+    Button valider = null;
+    public String identifiant_test = "alex";
+    public String mdp_test = "test";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        identifiant = (EditText)findViewById(R.id.ET_identifiant);
+        mdp = (EditText)findViewById(R.id.ET_mdp);
+        valider = (Button)findViewById(R.id.bValider);
+
+        valider.setOnClickListener(verifListener);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_login, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    private View.OnClickListener verifListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(identifiant.getText().toString().equals(identifiant_test) && mdp.getText().toString().equals(mdp_test)){
+                Toast.makeText(Login.this, "Vous vous êtes bien connecté\nBienvenue "+identifiant.getText().toString()+" !", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(Login.this, "L'identification a échouée !\nVeuillez réessayer", Toast.LENGTH_SHORT).show();
+            }
         }
+    };
 
-        return super.onOptionsItemSelected(item);
-    }
+
 }
