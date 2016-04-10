@@ -7,4 +7,7 @@
     <string name="TVnote">Note du restaurant</string>
     <string name="TVcommentaire">Commentaire</string>
     <string name="CBcontrevisite">Contre-Visite</string>
+    <string name="TVvide">null</string>
+    <string name="TVdeuxiemePartieNote">10</string>
+    <string name="TVslash">/</string>
 </resources>
