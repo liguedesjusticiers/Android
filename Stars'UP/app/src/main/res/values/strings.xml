@@ -4,4 +4,7 @@
     <string name="texte_identifiant">Identifiant</string>
     <string name="texte_mdp">Mot de passe</string>
     <string name="texte_bouton_valider">Valider</string>
+    <string name="TVnote">Note du restaurant</string>
+    <string name="TVcommentaire">Commentaire</string>
+    <string name="CBcontrevisite">Contre-Visite</string>
 </resources>

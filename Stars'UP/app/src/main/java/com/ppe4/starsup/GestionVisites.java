@@ -1,7 +1,10 @@
 package com.ppe4.starsup;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -10,6 +13,7 @@ import java.util.List;
 public class GestionVisites extends AppCompatActivity {
 
     ListView mListView;
+    String nomVisite = "Au bon tavernier";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +25,16 @@ public class GestionVisites extends AppCompatActivity {
 
         VisiteAdapter adapter = new VisiteAdapter(GestionVisites.this, visites);
         mListView.setAdapter(adapter);
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(GestionVisites.this , DetailsVisite.class);
+                intent.putExtra("nomVisite", genererVisites().get(position).getNom().toString());
+                intent.putExtra("noteVisite", genererVisites().get(position).getNote().toString());
+                startActivity(intent);
+            }
+        });
     }
 
     private List<Visite> genererVisites(){
