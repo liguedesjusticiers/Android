@@ -1,5 +1,6 @@
 package com.ppe4.starsup;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +33,9 @@ public class Login extends AppCompatActivity {
         public void onClick(View v) {
             if(identifiant.getText().toString().equals(identifiant_test) && mdp.getText().toString().equals(mdp_test)){
                 Toast.makeText(Login.this, "Vous vous êtes bien connecté\nBienvenue "+identifiant.getText().toString()+" !", Toast.LENGTH_SHORT).show();
+
+                Intent startNewActivity = new Intent(v.getContext(), GestionVisites.class);
+                startActivity(startNewActivity);
             }
             else{
                 Toast.makeText(Login.this, "L'identification a échouée !\nVeuillez réessayer", Toast.LENGTH_SHORT).show();
