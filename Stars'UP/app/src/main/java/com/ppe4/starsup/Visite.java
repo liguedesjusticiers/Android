@@ -6,10 +6,12 @@ package com.ppe4.starsup;
 public class Visite {
     private String nom;
     private String note;
+    private String commentaire;
 
-    public Visite(String nom, String note){
+    public Visite(String nom, String note, String commentaire){
         this.nom = nom;
         this.note = note;
+        this.commentaire = commentaire;
     }
 
     public String getNom() {
@@ -18,5 +20,13 @@ public class Visite {
 
     public String getNote() {
         return note;
+    }
+
+    public String getCommentaire(){
+        return commentaire;
+    }
+
+    public void setCommentaire(String commentaire){
+        this.commentaire = commentaire;
     }
 }

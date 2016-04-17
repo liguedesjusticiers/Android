@@ -32,6 +32,7 @@ public class GestionVisites extends AppCompatActivity {
                 Intent intent = new Intent(GestionVisites.this , DetailsVisite.class);
                 intent.putExtra("nomVisite", genererVisites().get(position).getNom().toString());
                 intent.putExtra("noteVisite", genererVisites().get(position).getNote().toString());
+                intent.putExtra("commentaireVisite", genererVisites().get(position).getCommentaire().toString());
                 startActivity(intent);
             }
         });
@@ -39,21 +40,21 @@ public class GestionVisites extends AppCompatActivity {
 
     private List<Visite> genererVisites(){
         List<Visite> visites = new ArrayList<Visite>();
-        visites.add(new Visite("A la petite chaise", "8"));
-        visites.add(new Visite("Le gourmandin", "2"));
-        visites.add(new Visite("La bouche des goûts", "4"));
-        visites.add(new Visite("Mia cucina", "5"));
-        visites.add(new Visite("Le bouche à oreille", "7"));
-        visites.add(new Visite("Kebab du coin", "4"));
-        visites.add(new Visite("Panini Gourmand", "8"));
-        visites.add(new Visite("La boulangerie", "6"));
-        visites.add(new Visite("La taverne du poney qui tousse", "3"));
-        visites.add(new Visite("La baraque à frites", "6"));
-        visites.add(new Visite("La table du pécheur", "10"));
-        visites.add(new Visite("Les frères toqués", "8"));
-        visites.add(new Visite("L'auberge du vieux crouton", "6"));
-        visites.add(new Visite("Le patio", "8"));
-        visites.add(new Visite("Flunch", "0"));
+        visites.add(new Visite("A la petite chaise", "8", ""));
+        visites.add(new Visite("Le gourmandin", "2", ""));
+        visites.add(new Visite("La bouche des goûts", "4", ""));
+        visites.add(new Visite("Mia cucina", "5", ""));
+        visites.add(new Visite("Le bouche à oreille", "7", ""));
+        visites.add(new Visite("Kebab du coin", "4", ""));
+        visites.add(new Visite("Panini Gourmand", "8", ""));
+        visites.add(new Visite("La boulangerie", "6", ""));
+        visites.add(new Visite("La taverne du poney qui tousse", "3", ""));
+        visites.add(new Visite("La baraque à frites", "6", ""));
+        visites.add(new Visite("La table du pécheur", "10", ""));
+        visites.add(new Visite("Les frères toqués", "8", ""));
+        visites.add(new Visite("L'auberge du vieux crouton", "6", ""));
+        visites.add(new Visite("Le patio", "8", ""));
+        visites.add(new Visite("Flunch", "0", ""));
         return visites;
     }
 }
