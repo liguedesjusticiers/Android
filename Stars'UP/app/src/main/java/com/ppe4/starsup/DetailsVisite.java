@@ -35,10 +35,6 @@ public class DetailsVisite extends AppCompatActivity {
     private View.OnClickListener confirmListener = new View.OnClickListener(){
         @Override
         public void onClick(View v){
-            Visite.setCommentaire(ETcommentaire.getText().toString());
-            Intent intent = getIntent();
-            Bundle bundle = intent.getExtras();
-            bundle.set("commentaire",);
         }
     };
 }

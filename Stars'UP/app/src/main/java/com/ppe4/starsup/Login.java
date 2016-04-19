@@ -1,47 +1,66 @@
 package com.ppe4.starsup;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
-public class Login extends AppCompatActivity {
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 
-    EditText identifiant = null;
-    EditText mdp = null;
-    Button valider = null;
-    public String identifiant_test = "alex";
-    public String mdp_test = "test";
+/**
+ * Created by Alex on 19/04/2016.
+ */
+public class Login extends AsyncTask<String,Void,String>{
+    private Context context;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
-        identifiant = (EditText)findViewById(R.id.ET_identifiant);
-        mdp = (EditText)findViewById(R.id.ET_mdp);
-        valider = (Button)findViewById(R.id.bValider);
-
-        valider.setOnClickListener(verifListener);
+    public Login(Context context){
+        this.context = context;
     }
 
-    private View.OnClickListener verifListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if(identifiant.getText().toString().equals(identifiant_test) && mdp.getText().toString().equals(mdp_test)){
-                Toast.makeText(Login.this, "Vous vous êtes bien connecté\nBienvenue "+identifiant.getText().toString()+" !", Toast.LENGTH_SHORT).show();
 
-                Intent startNewActivity = new Intent(v.getContext(), GestionVisites.class);
-                startActivity(startNewActivity);
+    @Override
+    protected String doInBackground(String... params) {
+        try{
+            String username = (String)params[0];
+            String password = (String)params[1];
+
+            String link = "http://localhost/starsup/index.php";
+            String data = URLEncoder.encode("username","UTF-8") + "=" + URLEncoder.encode(username,"UTF-8");
+            data += "&" + URLEncoder.encode("password","UTF-8") + "=" + URLEncoder.encode(password,"UTF-8");
+
+            URL url = new URL(link);
+            URLConnection conn = url.openConnection();
+
+            conn.setDoOutput(true);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+
+            wr.write(data);
+            wr.flush();
+
+            BufferedReader reader = new BufferedReader((new InputStreamReader(conn.getInputStream())));
+
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+
+            while((line = reader.readLine()) != null){
+                sb.append(line);
+                break;
             }
-            else{
-                Toast.makeText(Login.this, "L'identification a échouée !\nVeuillez réessayer", Toast.LENGTH_SHORT).show();
-            }
+
+            return sb.toString();
         }
-    };
+        catch(Exception e){
+            return new String("Exception: " + e.getMessage());
+        }
+    }
 
-
+    @Override
+    protected void onPostExecute(String result){
+        MainActivity.t;
+    }
 }
