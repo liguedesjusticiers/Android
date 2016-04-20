@@ -1,13 +1,7 @@
 package com.ppe4.starsup;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -20,23 +14,18 @@ import java.net.URLEncoder;
  * Created by Alex on 19/04/2016.
  */
 public class Login extends AsyncTask<String,Void,String>{
-    private TextView nom;
     private Context context;
+    private boolean verif;
 
-    public Login(Context context, TextView nom){
+    public Login(Context context){
         this.context = context;
-        this.nom = nom;
-    }
-
-    protected void onPreExecute(){
-
     }
 
     @Override
     protected String doInBackground(String... params) {
         try{
-            String username = (String)params[0];
-            String password = (String)params[1];
+            String username = params[0];
+            String password = params[1];
 
             String link = "http://192.168.1.88/starsup/index.php"; //remplacer adresse par ipv4 du pc de la bdd (meme réseau)
             String data = URLEncoder.encode("username","UTF-8") + "=" + URLEncoder.encode(username,"UTF-8");
@@ -54,22 +43,27 @@ public class Login extends AsyncTask<String,Void,String>{
             BufferedReader reader = new BufferedReader((new InputStreamReader(conn.getInputStream())));
 
             StringBuilder sb = new StringBuilder();
-            String line = null;
+            String line;
 
             while((line = reader.readLine()) != null){
                 sb.append(line);
                 break;
             }
 
+            this.setVerif(true);
             return sb.toString();
         }
         catch(Exception e){
-            return new String("Exception: " + e.getMessage());
+            this.setVerif(false);
+            return "Exception: " + e.getMessage();
         }
     }
 
-    @Override
-    protected void onPostExecute(String result){
-        this.nom.setText(result);
+    public boolean isVerif() {
+        return verif;
+    }
+
+    public void setVerif(boolean verif) {
+        this.verif = verif;
     }
 }
