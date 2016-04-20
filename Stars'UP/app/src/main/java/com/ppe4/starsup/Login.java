@@ -38,7 +38,7 @@ public class Login extends AsyncTask<String,Void,String>{
             String username = (String)params[0];
             String password = (String)params[1];
 
-            String link = "http://127.0.0.1/starsup/index.php";
+            String link = "http://192.168.1.88/starsup/index.php"; //remplacer adresse par ipv4 du pc de la bdd (meme réseau)
             String data = URLEncoder.encode("username","UTF-8") + "=" + URLEncoder.encode(username,"UTF-8");
             data += "&" + URLEncoder.encode("password","UTF-8") + "=" + URLEncoder.encode(password,"UTF-8");
 
