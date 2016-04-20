@@ -64,4 +64,12 @@
         android:layout_alignParentEnd="true"
         android:textAlignment="center"
         android:password="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/TVtest"
+        android:layout_above="@+id/bValider"
+        android:layout_alignStart="@+id/TV_identifiant" />
 </RelativeLayout>

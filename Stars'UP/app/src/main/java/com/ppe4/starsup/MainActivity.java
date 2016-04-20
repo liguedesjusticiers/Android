@@ -6,13 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText identifiant = null;
-    private EditText mdp = null;
-    Button valider = null;
+    private EditText identifiant,mdp;
+    private TextView nom;
+    private Button valider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,15 +22,18 @@ public class MainActivity extends AppCompatActivity {
 
         identifiant = (EditText)findViewById(R.id.ET_identifiant);
         mdp = (EditText)findViewById(R.id.ET_mdp);
-        valider = (Button)findViewById(R.id.bValider);
+        nom = (TextView)findViewById(R.id.TVtest);
+
+//        valider = (Button)findViewById(R.id.bValider);
 
 //        valider.setOnClickListener(verifListener);
     }
 
-    public void login(View view){
+    public void login(View view) {
         String username = identifiant.getText().toString();
         String password = mdp.getText().toString();
-        new Login(this).execute(username,password);
+        new Login(this, nom).execute(username, password);
+    }
 
 //    private View.OnClickListener verifListener = new View.OnClickListener() {
 //        @Override

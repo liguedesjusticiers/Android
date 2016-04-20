@@ -1,8 +1,12 @@
 package com.ppe4.starsup;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -16,12 +20,17 @@ import java.net.URLEncoder;
  * Created by Alex on 19/04/2016.
  */
 public class Login extends AsyncTask<String,Void,String>{
+    private TextView nom;
     private Context context;
 
-    public Login(Context context){
+    public Login(Context context, TextView nom){
         this.context = context;
+        this.nom = nom;
     }
 
+    protected void onPreExecute(){
+
+    }
 
     @Override
     protected String doInBackground(String... params) {
@@ -29,7 +38,7 @@ public class Login extends AsyncTask<String,Void,String>{
             String username = (String)params[0];
             String password = (String)params[1];
 
-            String link = "http://localhost/starsup/index.php";
+            String link = "http://127.0.0.1/starsup/index.php";
             String data = URLEncoder.encode("username","UTF-8") + "=" + URLEncoder.encode(username,"UTF-8");
             data += "&" + URLEncoder.encode("password","UTF-8") + "=" + URLEncoder.encode(password,"UTF-8");
 
@@ -61,6 +70,6 @@ public class Login extends AsyncTask<String,Void,String>{
 
     @Override
     protected void onPostExecute(String result){
-        MainActivity.t;
+        this.nom.setText(result);
     }
 }
