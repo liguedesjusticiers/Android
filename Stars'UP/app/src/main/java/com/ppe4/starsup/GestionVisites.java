@@ -1,11 +1,14 @@
 package com.ppe4.starsup;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +16,6 @@ import java.util.List;
 public class GestionVisites extends AppCompatActivity {
 
     ListView mListView;
-    String nomVisite = "Au bon tavernier";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,27 @@ public class GestionVisites extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed(){
+        new AlertDialog.Builder(this)
+            .setTitle("Attention !")
+            .setMessage("Voulez-vous vraiment vous déconnecter ?")
+            .setPositiveButton("oui", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent startNewActivity = new Intent(GestionVisites.this, MainActivity.class);
+                    startActivity(startNewActivity);
+                }
+            })
+            .setNegativeButton("non", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //QUEDAL WESH
+                }
+            })
+            .show();
     }
 
     private List<Visite> genererVisites(){

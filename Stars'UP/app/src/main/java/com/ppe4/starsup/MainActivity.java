@@ -47,13 +47,13 @@ public class MainActivity extends AppCompatActivity implements Login.AsyncRespon
 
     public void ouvertureListe(){
         if(getTest().equals("succes")){
-            Toast.makeText(MainActivity.this, "Vous vous êtes bien connecté\nBienvenue "+identifiant.getText().toString()+" !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Vous vous êtes bien connecté\nBienvenue "+identifiant.getText().toString()+" !", Toast.LENGTH_SHORT).show();
 
             Intent startNewActivity = new Intent(this, GestionVisites.class);
             startActivity(startNewActivity);
         }
         else{
-            Toast.makeText(MainActivity.this, "L'identification a échouée !\nVeuillez réessayer", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "L'identification a échouée !\nVeuillez réessayer", Toast.LENGTH_SHORT).show();
         }
     }
 
