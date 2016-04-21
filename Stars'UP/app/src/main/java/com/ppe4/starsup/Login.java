@@ -2,7 +2,6 @@ package com.ppe4.starsup;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -16,16 +15,20 @@ import java.net.URLEncoder;
  */
 public class Login extends AsyncTask<String,Void,String>{
     private Context context;
-    private TextView test;
-    private int verif;
 
-    public Login(Context context,int verif,TextView test){
-        this.context = context;
-        this.verif = verif;
-        this.test = test;
+    public interface AsyncResponse{
+        void processFinish(String output);
     }
 
+    public AsyncResponse delegate = null;
 
+    public Login(AsyncResponse delegate){
+        this.delegate = delegate;
+    }
+
+    public Login(Context context){
+        this.context = context;
+    }
 
     @Override
     protected String doInBackground(String... params) {
@@ -55,6 +58,7 @@ public class Login extends AsyncTask<String,Void,String>{
                 sb.append(line);
                 break;
             }
+
             return sb.toString();
         }
         catch(Exception e){
@@ -64,8 +68,6 @@ public class Login extends AsyncTask<String,Void,String>{
 
     @Override
     protected void onPostExecute(String result){
-
-        this.verif = 1;
-        this.test.setText(String.valueOf(verif));
+        delegate.processFinish(result);
     }
 }

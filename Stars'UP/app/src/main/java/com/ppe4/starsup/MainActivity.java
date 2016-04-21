@@ -1,58 +1,38 @@
 package com.ppe4.starsup;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
-    private TextView tst;
-    private int verif = 0;
+public class MainActivity extends AppCompatActivity implements Login.AsyncResponse {
     private EditText identifiant,mdp;
     private Button valider;
+    String test = "";
 
-    @Override
+    Login asyncTask = new Login(new Login.AsyncResponse(){
+        @Override
+        void processFinish(String output) {
+            test = output;
+        }
+    }).execute();
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         identifiant = (EditText)findViewById(R.id.ET_identifiant);
         mdp = (EditText)findViewById(R.id.ET_mdp);
-        tst = (TextView)findViewById(R.id.TV_identifiant);
-
         valider = (Button)findViewById(R.id.bValider);
-
-        valider.setOnClickListener(verifListener);
     }
 
     public void login(){
         String username = identifiant.getText().toString();
         String password = mdp.getText().toString();
-        new Login(this,verif,tst).execute(username, password);
-    }
+        new Login(this).execute(username,password);
 
-    private View.OnClickListener verifListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            login();
-            if(verif == 1){
-                Toast.makeText(MainActivity.this, "Vous vous êtes bien connecté\nBienvenue "+identifiant.getText().toString()+" !", Toast.LENGTH_SHORT).show();
-
-                Intent startNewActivity = new Intent(v.getContext(), GestionVisites.class);
-                startActivity(startNewActivity);
-            }
-            else{
-                Toast.makeText(MainActivity.this, "L'identification a échouée !\nVeuillez réessayer", Toast.LENGTH_SHORT).show();
-            }
-        }
-    };
-
-
-    public int isVerif() {
-        return verif;
+        Intent startNewActivity = new Intent(this, GestionVisites.class);
+        startActivity(startNewActivity);
     }
 }

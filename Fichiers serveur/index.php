@@ -7,12 +7,14 @@ if (mysqli_connect_errno($con)){
 
 $username = $_POST['username'];
 $password = $_POST['password'];
-$result = mysqli_query($con,"SELECT identifiant FROM utilisateur WHERE identifiant='$username' AND mdp='$password'");
-$row = mysqli_fetch_array($result);
-$data = $row[0];
+$result = mysqli_query($con,"SELECT * FROM utilisateur WHERE identifiant='$username' AND mdp='$password'");
+$check = mysqli_fetch_array($result);
 
-if($data){
-	echo $data;
+if(isset($check)){
+	echo "succes";
+}
+else{
+	echo "echec";
 }
 
 mysqli_close($con);
