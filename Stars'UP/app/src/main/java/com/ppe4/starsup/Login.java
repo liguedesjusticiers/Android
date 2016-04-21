@@ -22,12 +22,9 @@ public class Login extends AsyncTask<String,Void,String>{
 
     public AsyncResponse delegate = null;
 
-    public Login(AsyncResponse delegate){
-        this.delegate = delegate;
-    }
-
-    public Login(Context context){
+    public Login(Context context,AsyncResponse delegate){
         this.context = context;
+        this.delegate = delegate;
     }
 
     @Override
