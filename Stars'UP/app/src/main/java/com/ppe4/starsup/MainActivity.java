@@ -6,13 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
+    private TextView tst;
+    private int verif = 0;
     private EditText identifiant,mdp;
     private Button valider;
-    Login log = new Login(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,19 +22,24 @@ public class MainActivity extends AppCompatActivity {
 
         identifiant = (EditText)findViewById(R.id.ET_identifiant);
         mdp = (EditText)findViewById(R.id.ET_mdp);
+        tst = (TextView)findViewById(R.id.TV_identifiant);
 
         valider = (Button)findViewById(R.id.bValider);
 
         valider.setOnClickListener(verifListener);
     }
 
+    public void login(){
+        String username = identifiant.getText().toString();
+        String password = mdp.getText().toString();
+        new Login(this,verif,tst).execute(username, password);
+    }
+
     private View.OnClickListener verifListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            String username = identifiant.getText().toString();
-            String password = mdp.getText().toString();
-            log.execute(username, password);
-            if(log.isVerif()){
+            login();
+            if(verif == 1){
                 Toast.makeText(MainActivity.this, "Vous vous êtes bien connecté\nBienvenue "+identifiant.getText().toString()+" !", Toast.LENGTH_SHORT).show();
 
                 Intent startNewActivity = new Intent(v.getContext(), GestionVisites.class);
@@ -41,10 +47,12 @@ public class MainActivity extends AppCompatActivity {
             }
             else{
                 Toast.makeText(MainActivity.this, "L'identification a échouée !\nVeuillez réessayer", Toast.LENGTH_SHORT).show();
-                Toast.makeText(MainActivity.this, ""+log.isVerif()+"", Toast.LENGTH_SHORT).show();
             }
         }
     };
 
 
+    public int isVerif() {
+        return verif;
+    }
 }

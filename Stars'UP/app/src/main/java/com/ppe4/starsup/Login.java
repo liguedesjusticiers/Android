@@ -2,6 +2,7 @@ package com.ppe4.starsup;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -15,11 +16,16 @@ import java.net.URLEncoder;
  */
 public class Login extends AsyncTask<String,Void,String>{
     private Context context;
-    private boolean verif;
+    private TextView test;
+    private int verif;
 
-    public Login(Context context){
+    public Login(Context context,int verif,TextView test){
         this.context = context;
+        this.verif = verif;
+        this.test = test;
     }
+
+
 
     @Override
     protected String doInBackground(String... params) {
@@ -49,21 +55,17 @@ public class Login extends AsyncTask<String,Void,String>{
                 sb.append(line);
                 break;
             }
-
-            this.setVerif(true);
             return sb.toString();
         }
         catch(Exception e){
-            this.setVerif(false);
             return "Exception: " + e.getMessage();
         }
     }
 
-    public boolean isVerif() {
-        return verif;
-    }
+    @Override
+    protected void onPostExecute(String result){
 
-    public void setVerif(boolean verif) {
-        this.verif = verif;
+        this.verif = 1;
+        this.test.setText(String.valueOf(verif));
     }
 }
